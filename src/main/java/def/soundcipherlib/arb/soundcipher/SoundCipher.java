@@ -7,5 +7,5 @@ public class SoundCipher {
 	public SoundCipher(Object o) {
 	}
 
-	native public static void playNote(double pitch, double dynamic, double duration);
+	native public void playNote(double pitch, double dynamic, double duration);
 }
