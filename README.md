@@ -11,7 +11,8 @@ This candy is used for compilation (typing and API checking) but does not contai
 Clone this project with git and install the JSweet candy in your local Maven repository (so that you can refer to it as a dependency in other Maven projects):
 
 ```bash
-> mvn install
+tsc
+mvn install
 ```
 
 To deploy the candy to the [jsweet-candies](https://github.com/jsweet-candies) organization (please contact us to get an authorized access):

@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "moduleResolution": "node",
+        "module": "none",
+        "removeComments": true,
+        "forceConsistentCasingInFileNames": true,
+        "sourceMap": true,
+        "outDir": "src/main/resources/META-INF/resources/webjars/soundcipher/0.0.10-beta-SNAPSHOT",
+        "target": "es6"
+    },
+    "include": [
+        "src/main/ts/**/*.ts"
+    ],
+    "exclude": [
+        ".git"
+    ]
+}
