@@ -8,7 +8,17 @@ declare namespace arb.soundcipher {
     export class SoundCipher {
         public constructor(o : any);
 
-        public playNote(pitch : number, dynamic : number, duration : number);
+        public static PIANO : number;
+
+        public static SYNTH_DRUM : number;
+
+        public static ELECTRIC_GUITAR : number;
+
+        public instrument : number;
+
+        public playNote(note : number, dynamic : number, duration : number);
+
+        public playChord(notes : number[], dynamic : number, duration : number);
     }
 }
 
