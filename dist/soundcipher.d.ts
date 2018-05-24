@@ -10,15 +10,39 @@ declare namespace arb.soundcipher {
 
         public static PIANO : number;
 
-        public static SYNTH_DRUM : number;
+        public static XYLOPHONE : number;
 
         public static ELECTRIC_GUITAR : number;
 
-        public instrument : number;
+        public static ACOUSTIC_BASS : number;
+
+        public static STRINGS : number;
+
+        public static ORCHESTRA_HIT : number;
+
+        public static TRUMPET : number;
+
+        public static TUBA : number;
+
+        public static BRASS : number;
+
+        public static ALTO_SAX : number;
+
+        public static CLARINET : number;
+
+        public static FLUTE : number;
+
+        public static TAIKO : number;
+
+        public static SYNTH_DRUM : number;
+
+        public instrument : any;
 
         public playNote(note : number, dynamic : number, duration : number);
 
         public playChord(notes : number[], dynamic : number, duration : number);
+
+        public static loadInstrument(instrumentCode : number);
     }
 }
 
