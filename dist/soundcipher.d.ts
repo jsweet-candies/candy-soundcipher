@@ -36,13 +36,17 @@ declare namespace arb.soundcipher {
 
         public static SYNTH_DRUM : number;
 
-        public instrument : any;
+        public instrument : number;
 
         public playNote(note : number, dynamic : number, duration : number);
 
         public playChord(notes : number[], dynamic : number, duration : number);
 
+        public changeInstrument(instrumentCode : number);
+
         public static loadInstrument(instrumentCode : number);
+
+        public woah();
     }
 }
 

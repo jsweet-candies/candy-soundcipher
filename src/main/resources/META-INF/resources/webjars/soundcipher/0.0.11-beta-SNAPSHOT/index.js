@@ -18,11 +18,16 @@ var arb;
             constructor() {
                 this.channel = SoundCipher.count;
                 console.log('NEW SOUNDCIPHER!!!: channel #', SoundCipher.count);
-                if (SoundCipher.count >= 0) {
+                if (SoundCipher.count >= 0 && SoundCipher.count < 16) {
                     SoundCipher.count++;
                 }
                 else {
-                    SoundCipher.count = 0;
+                    if (coderBetaController !== 'undefined') {
+                        coderBetaController.coderBeta.processingCompiler.displayRuntimeError('Too many SoundCipher instances... there can only be a maximum of 16');
+                    }
+                    else {
+                        SoundCipher.count = 0;
+                    }
                 }
             }
             static initialize() {
@@ -55,6 +60,7 @@ var arb;
             set instrument(instrumentCode) {
                 this._instrument = instrumentCode;
                 initialized = initialized.then(() => {
+                    this.changeInstrument(instrumentCode);
                     const instrumentName = SoundCipher.getInstrumentName(instrumentCode);
                     return new Promise((resolve, reject) => {
                         log(`requesting instrument ${instrumentName} soundfontUrl: ${SoundFontUrl}`);
@@ -75,9 +81,6 @@ var arb;
                     MIDI.noteOn(this.channel, note, DEFAULT_NOTE_VELOCITY, DEFAULT_NOTE_DELAY);
                     MIDI.noteOff(this.channel, note, DEFAULT_NOTE_DELAY + duration);
                 });
-            }
-            playTheNote(note, dynamic = DEFAULT_NOTE_VELOCITY, duration = 0.75) {
-                log(`play note ${note} dynamic=${dynamic} duration=${duration} - WAITING`);
             }
             playChord(notes, dynamic = DEFAULT_NOTE_VELOCITY, duration = 0.75) {
                 return __awaiter(this, void 0, void 0, function* () {
@@ -110,18 +113,13 @@ var arb;
                     soundfontUrl: SoundFontUrl,
                     instrument: instrumentNames,
                     onprogress: function (state, progress) {
-                        for (var i = 0; i < instrumentNames.length; i++) {
-                            const instrumentCode = MIDI.GM.byName[instrumentNames[i]].number;
-                            var instrumentName = instrumentNames[i];
-                            log(`instrument [${instrumentName}] loading - state=${state} progress=${progress}`);
-                        }
+                        console.log("Getting load isntr args: ", instrumentNames);
+                        let instrumentName = instrumentNames;
+                        log(`instrument [${instrumentName}] loading - state=${state} progress=${progress}`);
                     },
                     onsuccess: function () {
-                        for (var i = 0; i < instrumentNames.length; i++) {
-                            const instrumentCode = MIDI.GM.byName[instrumentNames[i]].number;
-                            var instrumentName = instrumentNames[i];
-                            log(`instrument [${instrumentName}] loaded code=${instrumentCode}`);
-                        }
+                        let instrumentName = instrumentNames;
+                        log(`instrument [${instrumentName}] loaded...`);
                         onSuccess();
                     }
                 };
@@ -149,10 +147,7 @@ var arb;
         if (!window['arb.soundcipher.SoundCipher__MIDIInitialized']) {
             window['arb.soundcipher.SoundCipher__MIDIInitialized'] = true;
             initialized = new Promise((resolve, reject) => {
-                const defaultInstrumentName = [SoundCipher.getInstrumentName(SoundCipher.PIANO),
-                    SoundCipher.getInstrumentName(SoundCipher.XYLOPHONE),
-                    SoundCipher.getInstrumentName(SoundCipher.ELECTRIC_GUITAR),
-                    SoundCipher.getInstrumentName(SoundCipher.SYNTH_DRUM)];
+                const defaultInstrumentName = SoundCipher.getInstrumentName(SoundCipher.PIANO);
                 const initialize = () => {
                     console.log("!!!!!!!! RUNNING HERE!!!");
                     MIDI.loadPlugin(SoundCipher.getLoadInstrumentArgs(defaultInstrumentName, resolve));

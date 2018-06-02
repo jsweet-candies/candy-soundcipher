@@ -31,7 +31,7 @@ Add the following dependency to the ``pom.xml``:
 <dependency>
 	<groupId>org.jsweet.candies.ext</groupId>
 	<artifactId>soundcipher</artifactId>
-	<version>0.0.10-beta-SNAPSHOT</version>
+	<version>0.0.11-beta-SNAPSHOT</version>
 </dependency>
 ```
 

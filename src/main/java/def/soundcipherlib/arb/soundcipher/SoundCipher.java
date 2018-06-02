@@ -26,6 +26,7 @@ public class SoundCipher {
 
 	native public void playNote(double note, double dynamic, double duration);
 	native public void playChord(double[] notes, double dynamic, double duration);
-	native public void instrument(double instrumentCode);
+	native public void changeInstrument(double instrumentCode);
 	native public static void loadInstrument(double instrumentCode);
+    native public void woah();
 }
