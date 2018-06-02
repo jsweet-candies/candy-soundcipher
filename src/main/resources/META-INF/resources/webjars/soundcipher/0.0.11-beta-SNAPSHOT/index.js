@@ -60,13 +60,16 @@ var arb;
             set instrument(instrumentCode) {
                 this._instrument = instrumentCode;
                 initialized = initialized.then(() => {
-                    this.changeInstrument(instrumentCode);
+                    this.changeChannelInstrument(instrumentCode);
                     const instrumentName = SoundCipher.getInstrumentName(instrumentCode);
                     return new Promise((resolve, reject) => {
                         log(`requesting instrument ${instrumentName} soundfontUrl: ${SoundFontUrl}`);
                         MIDI.loadResource(SoundCipher.getLoadInstrumentArgs(instrumentName, resolve));
                     });
                 });
+            }
+            changeInstrument(instrumentCode) {
+                this.instrument = instrumentCode;
             }
             playNote(note, dynamic = DEFAULT_NOTE_VELOCITY, duration = 0.75) {
                 return __awaiter(this, void 0, void 0, function* () {
@@ -99,7 +102,7 @@ var arb;
                     MIDI.loadResource(SoundCipher.getLoadInstrumentArgs(instrumentName, resolve));
                 });
             }
-            changeInstrument(instrumentCode) {
+            changeChannelInstrument(instrumentCode) {
                 if ((SoundCipher.openChannels.length) <= this.channel) {
                     SoundCipher.openChannels.push(this.channel);
                     MIDI.programChange(this.channel, instrumentCode);

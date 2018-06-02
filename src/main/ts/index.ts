@@ -84,14 +84,17 @@ namespace arb.soundcipher {
         set instrument(instrumentCode: number) {
             this._instrument = instrumentCode;
             initialized = initialized.then(() => {
-                this.changeInstrument(instrumentCode);
+                this.changeChannelInstrument(instrumentCode);
                 const instrumentName = SoundCipher.getInstrumentName(instrumentCode);
                 return new Promise<void>((resolve, reject) => {
                     log(`requesting instrument ${instrumentName} soundfontUrl: ${SoundFontUrl}`);
                     MIDI.loadResource(SoundCipher.getLoadInstrumentArgs(instrumentName, resolve));
                 });
             });
+        }
 
+        public changeInstrument(instrumentCode: number) {
+            this.instrument = instrumentCode;
         }
 
         async playNote(note: number, dynamic: number = DEFAULT_NOTE_VELOCITY, duration: number = 0.75) {
@@ -136,7 +139,7 @@ namespace arb.soundcipher {
 	      });
         }       
         
-		changeInstrument(instrumentCode: number) {
+		private changeChannelInstrument(instrumentCode: number) {
             if ((SoundCipher.openChannels.length) <= this.channel ) {
                 SoundCipher.openChannels.push(this.channel);
                 MIDI.programChange(this.channel, instrumentCode);
