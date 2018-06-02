@@ -1,16 +1,16 @@
 declare var MIDI: any;
 declare var coderBetaController;
 
-const SoundFontUrl: string = window['arb.soundcipher.SoundCipher__SoundFontUrl'] || '/resources/soundfont/';
+const SoundFontUrl: string = window['arb.ktsoundcipher.KTSoundCipher__SoundFontUrl'] || '/resources/soundfont/';
 
-namespace arb.soundcipher {
+namespace arb.ktsoundcipher {
 
     let initialized: Promise<void> = Promise.resolve();
 
     const DEFAULT_NOTE_DELAY = 0; // play one note every quarter second
     const DEFAULT_NOTE_VELOCITY = 127; // how hard the note hits
 
-    export class SoundCipher {
+    export class KTSoundCipher {
 		
 		static readonly PIANO = 0;
         static readonly XYLOPHONE=13;
@@ -33,45 +33,44 @@ namespace arb.soundcipher {
         channel : number;
         
         constructor() {
-            // each SoundCipher instance will have a channel number
+            // each KTSoundCipher instance will have a channel number
             // so that multiple sounds can be played at the same time
-            this.channel = SoundCipher.count;
-            console.log('NEW SOUNDCIPHER!!!: channel #', SoundCipher.count);
-            if (SoundCipher.count >= 0 && SoundCipher.count < 16) {
-                SoundCipher.count++;
+            this.channel = KTSoundCipher.count;
+            if (KTSoundCipher.count >= 0 && KTSoundCipher.count < 16) {
+                KTSoundCipher.count++;
             } else {
                 // Display a runtime error msg in the KTCODER
                 if (coderBetaController !== 'undefined') {
-                    coderBetaController.coderBeta.processingCompiler.displayRuntimeError('Too many SoundCipher instances... there can only be a maximum of 16');
+                    coderBetaController.coderBeta.processingCompiler.displayRuntimeError('Too many KTSoundCipher instances... there can only be a maximum of 16');
                 } else {
-                    SoundCipher.count = 0;
+                    KTSoundCipher.count = 0;
                 }
             }
         }
         
         static initialize() {    
-            SoundCipher.instrumentSoundMap.set(SoundCipher.PIANO, "acoustic_grand_piano");
-            SoundCipher.instrumentSoundMap.set(SoundCipher.XYLOPHONE, "xylophone");
-            SoundCipher.instrumentSoundMap.set(SoundCipher.ELECTRIC_GUITAR, "electric_guitar_clean");
-            SoundCipher.instrumentSoundMap.set(SoundCipher.ACOUSTIC_BASS, "acoustic_bass");
-            SoundCipher.instrumentSoundMap.set(SoundCipher.STRINGS, "string_ensemble_1");
-            SoundCipher.instrumentSoundMap.set(SoundCipher.ORCHESTRA_HIT, "orchestra_hit");
-            SoundCipher.instrumentSoundMap.set(SoundCipher.TRUMPET, "trumpet");
-            SoundCipher.instrumentSoundMap.set(SoundCipher.TUBA, "tuba");
-            SoundCipher.instrumentSoundMap.set(SoundCipher.BRASS, "brass_section");
-            SoundCipher.instrumentSoundMap.set(SoundCipher.ALTO_SAX, "alto_sax");
-            SoundCipher.instrumentSoundMap.set(SoundCipher.CLARINET, "clarinet");
-            SoundCipher.instrumentSoundMap.set(SoundCipher.FLUTE, "flute");
-            SoundCipher.instrumentSoundMap.set(SoundCipher.TAIKO, "taiko_drum");
-            SoundCipher.instrumentSoundMap.set(SoundCipher.SYNTH_DRUM, "synth_drum");
+            KTSoundCipher.instrumentSoundMap.set(KTSoundCipher.PIANO, "acoustic_grand_piano");
+            KTSoundCipher.instrumentSoundMap.set(KTSoundCipher.XYLOPHONE, "xylophone");
+            KTSoundCipher.instrumentSoundMap.set(KTSoundCipher.ELECTRIC_GUITAR, "electric_guitar_clean");
+            KTSoundCipher.instrumentSoundMap.set(KTSoundCipher.ACOUSTIC_BASS, "acoustic_bass");
+            KTSoundCipher.instrumentSoundMap.set(KTSoundCipher.STRINGS, "string_ensemble_1");
+            KTSoundCipher.instrumentSoundMap.set(KTSoundCipher.ORCHESTRA_HIT, "orchestra_hit");
+            KTSoundCipher.instrumentSoundMap.set(KTSoundCipher.TRUMPET, "trumpet");
+            KTSoundCipher.instrumentSoundMap.set(KTSoundCipher.TUBA, "tuba");
+            KTSoundCipher.instrumentSoundMap.set(KTSoundCipher.BRASS, "brass_section");
+            KTSoundCipher.instrumentSoundMap.set(KTSoundCipher.ALTO_SAX, "alto_sax");
+            KTSoundCipher.instrumentSoundMap.set(KTSoundCipher.CLARINET, "clarinet");
+            KTSoundCipher.instrumentSoundMap.set(KTSoundCipher.FLUTE, "flute");
+            KTSoundCipher.instrumentSoundMap.set(KTSoundCipher.TAIKO, "taiko_drum");
+            KTSoundCipher.instrumentSoundMap.set(KTSoundCipher.SYNTH_DRUM, "synth_drum");
         }
         
       static getInstrumentName(soundCipherInstrumentCode: number): string {
-            if (SoundCipher.instrumentSoundMap.get(soundCipherInstrumentCode)) {
-              return SoundCipher.instrumentSoundMap.get(soundCipherInstrumentCode);
+            if (KTSoundCipher.instrumentSoundMap.get(soundCipherInstrumentCode)) {
+              return KTSoundCipher.instrumentSoundMap.get(soundCipherInstrumentCode);
             } else {
               // default
-              return SoundCipher.instrumentSoundMap.get(SoundCipher.PIANO);
+              return KTSoundCipher.instrumentSoundMap.get(KTSoundCipher.PIANO);
             }
         }
 
@@ -85,10 +84,10 @@ namespace arb.soundcipher {
             this._instrument = instrumentCode;
             initialized = initialized.then(() => {
                 this.changeChannelInstrument(instrumentCode);
-                const instrumentName = SoundCipher.getInstrumentName(instrumentCode);
+                const instrumentName = KTSoundCipher.getInstrumentName(instrumentCode);
                 return new Promise<void>((resolve, reject) => {
                     log(`requesting instrument ${instrumentName} soundfontUrl: ${SoundFontUrl}`);
-                    MIDI.loadResource(SoundCipher.getLoadInstrumentArgs(instrumentName, resolve));
+                    MIDI.loadResource(KTSoundCipher.getLoadInstrumentArgs(instrumentName, resolve));
                 });
             });
         }
@@ -104,9 +103,9 @@ namespace arb.soundcipher {
             log('ready to play');
 
             // Check if MIDI channel not yet open
-            if ((SoundCipher.openChannels.length) <= this.channel ) {
+            if ((KTSoundCipher.openChannels.length) <= this.channel ) {
                 MIDI.programChange(this.channel, 0);
-                SoundCipher.openChannels.push(this.channel);
+                KTSoundCipher.openChannels.push(this.channel);
             }
 
             // play the note
@@ -133,15 +132,15 @@ namespace arb.soundcipher {
         
 		static loadInstrument(instrumentCode: number) {
 		  return new Promise((resolve, reject) => {
-		    var instrumentName = SoundCipher.getInstrumentName(instrumentCode);
+		    var instrumentName = KTSoundCipher.getInstrumentName(instrumentCode);
 		    log(`requesting instrument ${instrumentName} soundfontUrl: ${SoundFontUrl}`);
-		    MIDI.loadResource(SoundCipher.getLoadInstrumentArgs(instrumentName, resolve));
+		    MIDI.loadResource(KTSoundCipher.getLoadInstrumentArgs(instrumentName, resolve));
 	      });
         }       
         
 		private changeChannelInstrument(instrumentCode: number) {
-            if ((SoundCipher.openChannels.length) <= this.channel ) {
-                SoundCipher.openChannels.push(this.channel);
+            if ((KTSoundCipher.openChannels.length) <= this.channel ) {
+                KTSoundCipher.openChannels.push(this.channel);
                 MIDI.programChange(this.channel, instrumentCode);
             } else {
                 MIDI.programChange(this.channel, instrumentCode);
@@ -153,68 +152,48 @@ namespace arb.soundcipher {
                 soundfontUrl: SoundFontUrl,
                 instrument: instrumentNames,
                 onprogress: function (state, progress) {
-                    console.log("Getting load isntr args: ", instrumentNames);
                     let instrumentName = instrumentNames;
-                    log(`instrument [${instrumentName}] loading - state=${state} progress=${progress}`);
-                    //  for (var i=0; i<instrumentNames.length; i++) {
-                    //     var instrumentName = instrumentNames[i];
-                    //     log(`instrument [${instrumentName}] loading - state=${state} progress=${progress}`);
-                    // }
+                    log(`instrument [${instrumentName}] loading... state=${state} progress=${progress}`);
                 },
                 onsuccess: function () {
-                    // const instrumentCode = MIDI.GM.byName[instrumentNames[i]].number;
                     let instrumentName = instrumentNames;
                     log(`instrument [${instrumentName}] loaded...`);
-                    // for (var i=0; i<instrumentNames.length; i++) {
-                    //     // const instrumentCode = MIDI.GM.byName[instrumentNames[i]].number;
-                    //     var instrumentName = instrumentNames[i];
-                    //     log(`instrument [${instrumentName}] loaded...`);
-                    // }
                     onSuccess();
                 }
             }
         }
     }
     
-    SoundCipher.initialize();
+    KTSoundCipher.initialize();
 
-    if (!window['arb.soundcipher.SoundCipher__MIDIInitialized']) {
-        window['arb.soundcipher.SoundCipher__MIDIInitialized'] = true;
+    function whenMidiLoaded(callback) {
+        const interval = 10;
+        if (typeof MIDI === 'undefined' || typeof MIDI.loadPlugin === 'undefined') {
+            setTimeout(() => {
+                whenMidiLoaded(callback);
+            }, interval);
+        } else {
+            callback();
+        } 
+    }
+
+    if (!window['arb.ktsoundcipher.KTSoundCipher__MIDIInitialized']) {
+        window['arb.ktsoundcipher.KTSoundCipher__MIDIInitialized'] = true;
         initialized = new Promise<void>((resolve, reject) => {
-            const defaultInstrumentName: string = SoundCipher.getInstrumentName(SoundCipher.PIANO)
-                // ,SoundCipher.getInstrumentName(SoundCipher.XYLOPHONE)
-                // ,SoundCipher.getInstrumentName(SoundCipher.ELECTRIC_GUITAR)
-                // ,SoundCipher.getInstrumentName(SoundCipher.ACOUSTIC_BASS)
-                // ,SoundCipher.getInstrumentName(SoundCipher.STRINGS)
-                // ,SoundCipher.getInstrumentName(SoundCipher.ORCHESTRA_HIT)
-                // ,SoundCipher.getInstrumentName(SoundCipher.TRUMPET)
-                // ,SoundCipher.getInstrumentName(SoundCipher.TUBA)
-                // ,SoundCipher.getInstrumentName(SoundCipher.BRASS)
-                // ,SoundCipher.getInstrumentName(SoundCipher.ALTO_SAX)
-                // ,SoundCipher.getInstrumentName(SoundCipher.FLUTE)
-                // ,SoundCipher.getInstrumentName(SoundCipher.TAIKO)
-                // ,SoundCipher.getInstrumentName(SoundCipher.SYNTH_DRUM)];
+            const defaultInstrumentName: string = KTSoundCipher.getInstrumentName(KTSoundCipher.PIANO)
             const initialize = () => {
-                    console.log("!!!!!!!! RUNNING HERE!!!");
-                    MIDI.loadPlugin(SoundCipher.getLoadInstrumentArgs(defaultInstrumentName, resolve));
-                }
-
-            log('request SoundCipher initialization');
+                MIDI.loadPlugin(KTSoundCipher.getLoadInstrumentArgs(defaultInstrumentName, resolve));
+            }
+            log('request KTSoundCipher initialization');
             if (document.readyState == 'complete') {
-                if (typeof MIDI.loadPlugin === 'undefined') {
-                    console.log('MIDI not yet defined');
-                    setTimeout(initialize, 1000);
-                } else {
-                    initialize();
-                }
+                whenMidiLoaded(initialize);
             } else {
-                console.log('Doc not ready, initialize on window load');
                 window.onload = initialize;
             }
         });
     }
 
     function log(message: string) {
-        console.info(`SoundCipher: ${message}`);
+        console.info(`KTSoundCipher: ${message}`);
     }
 }

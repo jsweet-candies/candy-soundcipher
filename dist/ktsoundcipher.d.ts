@@ -1,11 +1,11 @@
 /* Generated from Java with JSweet 2.0.0-SNAPSHOT - http://www.jsweet.org */
-declare namespace arb.soundcipher {
+declare namespace arb.ktsoundcipher {
     /**
      * An example of a library definition.
      * @param {*} o
      * @class
      */
-    export class SoundCipher {
+    export class KTSoundCipher {
         public constructor(o : any);
 
         public static PIANO : number;
@@ -45,8 +45,6 @@ declare namespace arb.soundcipher {
         public changeInstrument(instrumentCode : number);
 
         public static loadInstrument(instrumentCode : number);
-
-        public woah();
     }
 }
 
