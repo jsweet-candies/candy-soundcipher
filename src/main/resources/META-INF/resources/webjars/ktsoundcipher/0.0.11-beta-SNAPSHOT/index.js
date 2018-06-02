@@ -21,7 +21,7 @@ var arb;
                     KTSoundCipher.count++;
                 }
                 else {
-                    if (coderBetaController !== 'undefined') {
+                    if (typeof coderBetaController !== 'undefined') {
                         coderBetaController.coderBeta.processingCompiler.displayRuntimeError('Too many KTSoundCipher instances... there can only be a maximum of 16');
                     }
                     else {
