@@ -1,5 +1,4 @@
 declare var MIDI: any;
-declare var coderBetaController;
 
 const SoundFontUrl: string = window['arb.soundcipher.SoundCipher__SoundFontUrl'] || '/resources/soundfont/';
 
