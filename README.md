@@ -1,8 +1,8 @@
-# JSweet ktsoundcipher candy
+# JSweet soundcipher candy
 
 ## Description
 
-This project is a Java bridge to the ktsoundcipher library, so that soundcipher can be used from Java (thanks to the JSweet transpiler).
+This project is a Java bridge to the soundcipher library, so that soundcipher can be used from Java (thanks to the JSweet transpiler).
 
 This candy is used for compilation (typing and API checking) but does not contain any implementation, similarly to a C/C++ header file or to a TypeScript definition file. 
 
@@ -30,7 +30,7 @@ Add the following dependency to the ``pom.xml``:
 ```xml
 <dependency>
 	<groupId>org.jsweet.candies.ext</groupId>
-	<artifactId>ktsoundcipher</artifactId>
+	<artifactId>soundcipher</artifactId>
 	<version>0.0.11-beta-SNAPSHOT</version>
 </dependency>
 ```

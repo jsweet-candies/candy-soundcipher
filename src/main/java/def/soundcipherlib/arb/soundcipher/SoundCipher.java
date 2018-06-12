@@ -1,10 +1,10 @@
-package def.ktsoundcipherlib.arb.ktsoundcipher;
+package def.soundcipherlib.arb.soundcipher;
 
 /**
  * An example of a library definition.
  */
-public class KTSoundCipher {
-	public KTSoundCipher(Object o) {
+public class SoundCipher {
+	public SoundCipher(Object o) {
 	}
 
     public static final float PIANO = 0;
@@ -28,4 +28,5 @@ public class KTSoundCipher {
 	native public void playChord(double[] notes, double dynamic, double duration);
 	native public void changeInstrument(double instrumentCode);
 	native public static void loadInstrument(double instrumentCode);
+    native public static String getInstrumentName(double instrumentCode);
 }

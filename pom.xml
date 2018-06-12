@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.jsweet.candies</groupId>
-	<artifactId>ktsoundcipher</artifactId>
+	<artifactId>soundcipher</artifactId>
 	<version>0.0.11-beta-SNAPSHOT</version>
 	<properties>
 		<jsweet.transpiler.version>2.0.0</jsweet.transpiler.version>
