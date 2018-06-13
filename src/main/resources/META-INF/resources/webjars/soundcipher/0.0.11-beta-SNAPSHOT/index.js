@@ -17,7 +17,7 @@ var arb;
         class SoundCipher {
             constructor() {
                 this.channel = SoundCipher.channelCount;
-                if (SoundCipher.channelCount >= 0 && SoundCipher.channelCount < SoundCipher.MAX_CHANNELS) {
+                if (SoundCipher.channelCount >= 0 && SoundCipher.channelCount <= SoundCipher.MAX_CHANNEL) {
                     SoundCipher.channelCount++;
                 }
                 else {
@@ -81,7 +81,7 @@ var arb;
                         SoundCipher.openChannels.push(this.channel);
                     }
                     MIDI.setVolume(this.channel, 127);
-                    MIDI.noteOn(this.channel, note, DEFAULT_NOTE_VELOCITY, DEFAULT_NOTE_DELAY);
+                    MIDI.noteOn(this.channel, note, dynamic, DEFAULT_NOTE_DELAY);
                     MIDI.noteOff(this.channel, note, DEFAULT_NOTE_DELAY + duration);
                 });
             }
@@ -141,7 +141,7 @@ var arb;
         SoundCipher.TAIKO = 116;
         SoundCipher.SYNTH_DRUM = 118;
         SoundCipher.channelCount = 0;
-        SoundCipher.MAX_CHANNELS = 16;
+        SoundCipher.MAX_CHANNEL = 16;
         SoundCipher.maxChannelErrorHandler = () => { };
         SoundCipher.instrumentSoundMap = new Map();
         SoundCipher.openChannels = [];
