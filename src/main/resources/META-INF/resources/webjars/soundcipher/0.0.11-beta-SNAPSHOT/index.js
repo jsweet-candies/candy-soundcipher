@@ -63,7 +63,7 @@ var arb;
                         const instrumentName = SoundCipher.getInstrumentName(instrumentCode);
                         return new Promise((resolve, reject) => {
                             log(`requesting instrument ${instrumentName} soundfontUrl: ${SoundFontUrl}`);
-                            MIDI.loadResource(SoundCipher.getLoadInstrumentArgs(instrumentName, instrumentCode, resolve));
+                            MIDI.loadResource(SoundCipher.getLoadInstrumentArgs(instrumentName, resolve));
                         });
                     }
                 });
@@ -99,7 +99,7 @@ var arb;
                 return new Promise((resolve, reject) => {
                     var instrumentName = SoundCipher.getInstrumentName(instrumentCode);
                     log(`requesting instrument ${instrumentName} soundfontUrl: ${SoundFontUrl}`);
-                    MIDI.loadResource(SoundCipher.getLoadInstrumentArgs(instrumentName, instrumentCode, resolve));
+                    MIDI.loadResource(SoundCipher.getLoadInstrumentArgs(instrumentName, resolve));
                 });
             }
             changeChannelInstrument(instrumentCode) {
@@ -111,7 +111,7 @@ var arb;
                     MIDI.programChange(this.channel, instrumentCode);
                 }
             }
-            static getLoadInstrumentArgs(instrumentName, instrumentCode, onSuccess) {
+            static getLoadInstrumentArgs(instrumentName, onSuccess) {
                 return {
                     soundfontUrl: SoundFontUrl,
                     instrument: instrumentName,
@@ -120,6 +120,7 @@ var arb;
                     },
                     onsuccess: function () {
                         log(`instrument [${instrumentName}] loaded...`);
+                        const instrumentCode = MIDI.GM.byName[instrumentName].number;
                         SoundCipher.instrumentSoundMap.set(instrumentCode, { name: instrumentName, isLoaded: true });
                         onSuccess();
                     }
@@ -163,7 +164,7 @@ var arb;
             initialized = new Promise((resolve, reject) => {
                 const defaultInstrumentName = SoundCipher.getInstrumentName(SoundCipher.PIANO);
                 const initialize = () => {
-                    MIDI.loadPlugin(SoundCipher.getLoadInstrumentArgs(defaultInstrumentName, SoundCipher.PIANO, resolve));
+                    MIDI.loadPlugin(SoundCipher.getLoadInstrumentArgs(defaultInstrumentName, resolve));
                 };
                 log('request SoundCipher initialization');
                 if (document.readyState == 'complete') {
