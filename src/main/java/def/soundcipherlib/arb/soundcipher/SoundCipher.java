@@ -4,7 +4,7 @@ package def.soundcipherlib.arb.soundcipher;
  * SoundCipher is a library that you can use to play notes and make music in Processing.
  * The SoundCipher object should be initialized as follows:
  * <pre>
- * SoundCipher sc = SoundCipher(this);
+ * SoundCipher sc = new SoundCipher(this);
  * </pre>
  * To play a note:
  * <pre>
