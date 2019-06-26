@@ -1,4 +1,4 @@
-/* Generated from Java with JSweet 2.0.0-SNAPSHOT - http://www.jsweet.org */
+/* Generated from Java with JSweet 2.3.0 - http://www.jsweet.org */
 declare namespace arb.soundcipher {
     /**
      * Constructor to initialize the SoundCipher object with the Processing context
