@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.jsweet.candies</groupId>
 	<artifactId>soundcipher</artifactId>
-	<version>0.0.11.0</version>
+	<version>0.0.11.1</version>
 	<properties>
 		<jsweet.transpiler.version>2.3.0</jsweet.transpiler.version>
 		<jsweet.core.version>6.0.1</jsweet.core.version>
@@ -87,21 +87,21 @@
 
 			<plugin>
 				<artifactId>maven-antrun-plugin</artifactId>
-				<version>1.8</version>
 				<executions>
 					<execution>
-						<phase>package</phase>
+						<phase>process-sources</phase>
 						<configuration>
-							<target>
-								<echo message="copying generated bundles to dist..." />
-
-								<mkdir dir="dist/"></mkdir>
+							<tasks>
+								<echo message="copying JS files" />
 
 								<copy
-									file="src/main/resources/META-INF/resources/typings/${project.artifactId}/${project.version}/bundle.d.ts"
-									tofile="dist/${project.artifactId}.d.ts" verbose="true"
-									failonerror="false" />
-							</target>
+									todir="src/main/resources/META-INF/resources/webjars/${project.artifactId}/${project.version}/" 
+									verbose="true"
+									failonerror="true">
+									<fileset dir="src/main/resources/SoundCipherJavaScriptFiles" 
+										includes="**" />
+								</copy>
+							</tasks>
 						</configuration>
 						<goals>
 							<goal>run</goal>

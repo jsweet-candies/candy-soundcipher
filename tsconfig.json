@@ -5,7 +5,7 @@
         "removeComments": true,
         "forceConsistentCasingInFileNames": true,
         "sourceMap": true,
-        "outDir": "src/main/resources/META-INF/resources/webjars/soundcipher/0.0.11-beta-SNAPSHOT",
+        "outDir": "src/main/resources/SoundCipherJavaScriptFiles",
         "target": "es6"
     },
     "include": [
