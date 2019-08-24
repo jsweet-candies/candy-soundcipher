@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.jsweet.candies</groupId>
 	<artifactId>soundcipher</artifactId>
-	<version>0.0.11.1</version>
+	<version>0.0.11.3</version>
 	<properties>
 		<jsweet.transpiler.version>2.3.0</jsweet.transpiler.version>
 		<jsweet.core.version>6.0.1</jsweet.core.version>
