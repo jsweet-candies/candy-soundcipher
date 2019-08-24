@@ -455,6 +455,57 @@ namespace arb.soundcipher {
             SoundCipher.instrumentSoundMap.set(SoundCipher.SOPRANO_SAX, { name: "soprano_sax", isLoaded: false }); /* 64 */
             SoundCipher.instrumentSoundMap.set(SoundCipher.TENOR_SAX, { name: "tenor_sax", isLoaded: false }); /* 66 */
 
+            SoundCipher.instrumentSoundMap.set(SoundCipher.BARITONE_SAX, { name: "baritone_sax", isLoaded: false }); /* 67 */
+            SoundCipher.instrumentSoundMap.set(SoundCipher.OBOE, { name: "oboe", isLoaded: false }); /* 68 */
+    
+            SoundCipher.instrumentSoundMap.set(SoundCipher.ENGLISH_HORN, { name: "english_horn", isLoaded: false }); /* 69 */
+            SoundCipher.instrumentSoundMap.set(SoundCipher.BASSOON, { name: "bassoon", isLoaded: false }); /* 70 */
+            SoundCipher.instrumentSoundMap.set(SoundCipher.PICCOLO, { name: "piccolo", isLoaded: false }); /* 72 */
+            
+            SoundCipher.instrumentSoundMap.set(SoundCipher.RECORDER, { name: "recorder", isLoaded: false }); /* 74 */
+            SoundCipher.instrumentSoundMap.set(SoundCipher.PAN_FLUTE, { name: "pan_flute", isLoaded: false }); /* 75 */
+            SoundCipher.instrumentSoundMap.set(SoundCipher.BOTTLE_BLOW, { name: "blown_bottle", isLoaded: false }); /* 76 */
+            SoundCipher.instrumentSoundMap.set(SoundCipher.SHAKUHACHI, { name: "shakuhachi", isLoaded: false }); /* 77 */
+            SoundCipher.instrumentSoundMap.set(SoundCipher.WHISTLE, { name: "whistle", isLoaded: false }); /* 78 */
+    
+            SoundCipher.instrumentSoundMap.set(SoundCipher.OCARINA, { name: "ocarina", isLoaded: false }); /* 79 */
+            SoundCipher.instrumentSoundMap.set(SoundCipher.GMSQUARE_WAVE, { name: "lead_1_square", isLoaded: false }); /* 80 */
+            SoundCipher.instrumentSoundMap.set(SoundCipher.GMSAW_WAVE, { name: "lead_2_sawtooth", isLoaded: false }); /* 81 */
+            SoundCipher.instrumentSoundMap.set(SoundCipher.SYNTH_CALLIOPE, { name: "lead_3_calliope", isLoaded: false }); /* 82 */
+            SoundCipher.instrumentSoundMap.set(SoundCipher.CHIFFER_LEAD, { name: "lead_4_chiff", isLoaded: false }); /* 83 */
+            SoundCipher.instrumentSoundMap.set(SoundCipher.CHARANG, { name: "lead_5_charang", isLoaded: false }); /* 84 */
+    
+            SoundCipher.instrumentSoundMap.set(SoundCipher.SOLO_VOX, { name: "xylophone", isLoaded: false }); /* 85 */
+            SoundCipher.instrumentSoundMap.set(SoundCipher.FANTASIA, { name: "xylophone", isLoaded: false }); /* 88 */
+            SoundCipher.instrumentSoundMap.set(SoundCipher.WARM_PAD, { name: "pad_2_warm", isLoaded: false }); /* 89 */
+            SoundCipher.instrumentSoundMap.set(SoundCipher.POLYSYNTH, { name: "pad_3_polysynth", isLoaded: false }); /* 90 */
+            SoundCipher.instrumentSoundMap.set(SoundCipher.SPACE_VOICE, { name: "synth_voice", isLoaded: false }); /* 91 */
+    
+            SoundCipher.instrumentSoundMap.set(SoundCipher.BOWED_GLASS, { name: "pad_5_bowed", isLoaded: false }); /* 92 */
+            SoundCipher.instrumentSoundMap.set(SoundCipher.METAL_PAD, { name: "pad_6_metallic", isLoaded: false }); /* 93 */
+            SoundCipher.instrumentSoundMap.set(SoundCipher.HALO_PAD, { name: "pad_7_halo", isLoaded: false }); /* 94 */
+            SoundCipher.instrumentSoundMap.set(SoundCipher.SWEEP_PAD, { name: "pad_8_sweep", isLoaded: false }); /* 95 */
+            SoundCipher.instrumentSoundMap.set(SoundCipher.ICE_RAIN, { name: "xylophone", isLoaded: false }); /* 96 */
+    
+            SoundCipher.instrumentSoundMap.set(SoundCipher.SOUNDTRACK, { name: "fx_2_soundtrack", isLoaded: false }); /* 97 */
+            SoundCipher.instrumentSoundMap.set(SoundCipher.CRYSTAL, { name: "fx_3_crystal", isLoaded: false }); /* 98 */
+            SoundCipher.instrumentSoundMap.set(SoundCipher.ATMOSPHERE, { name: "fx_4_atmosphere", isLoaded: false }); /* 99 */
+            SoundCipher.instrumentSoundMap.set(SoundCipher.BRIGHTNESS, { name: "fx_5_brightness", isLoaded: false }); /* 100 */
+            SoundCipher.instrumentSoundMap.set(SoundCipher.GOBLIN, { name: "fx_6_goblins", isLoaded: false }); /* 101 */
+    
+            SoundCipher.instrumentSoundMap.set(SoundCipher.ECHO_DROPS, { name: "fx_7_echoes", isLoaded: false }); /* 102 */
+            SoundCipher.instrumentSoundMap.set(SoundCipher.STAR_THEME, { name: "fx_8_scifi", isLoaded: false }); /* 103 */
+            SoundCipher.instrumentSoundMap.set(SoundCipher.SITAR, { name: "sitar", isLoaded: false }); /* 104 */
+    
+            SoundCipher.instrumentSoundMap.set(SoundCipher.BANJO, { name: "banjo", isLoaded: false }); /* 105 */
+            SoundCipher.instrumentSoundMap.set(SoundCipher.SHAMISEN, { name: "shamisen", isLoaded: false }); /* 106 */
+            SoundCipher.instrumentSoundMap.set(SoundCipher.KOTO, { name: "koto", isLoaded: false }); /* 107 */
+            SoundCipher.instrumentSoundMap.set(SoundCipher.KALIMBA, { name: "kalimba", isLoaded: false }); /* 108 */
+            SoundCipher.instrumentSoundMap.set(SoundCipher.BAGPIPES, { name: "bag_pipe", isLoaded: false }); /* 109 */
+            SoundCipher.instrumentSoundMap.set(SoundCipher.FIDDLE, { name: "fiddle", isLoaded: false }); /* 110 */
+            SoundCipher.instrumentSoundMap.set(SoundCipher.SHANNAI, { name: "shanai", isLoaded: false }); /* 111 */
+            SoundCipher.instrumentSoundMap.set(SoundCipher.TINKLE_BELL, { name: "tinkle_bell", isLoaded: false }); /* 112 */
+
             for (let i = 0; i < 128; i++) {
                 if (!SoundCipher.instrumentSoundMap.has(i)) {
                     SoundCipher.instrumentSoundMap.set(i, DEFAULT_INSTRUMENT_PIANO);
