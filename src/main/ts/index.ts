@@ -1,6 +1,6 @@
 declare var MIDI: any;
 
-const SoundFontUrl: string = window['arb.soundcipher.SoundCipher__SoundFontUrl'] || '/resources/soundfont/';
+const SoundFontUrl: string = window['SoundCipher__SoundFontUrl'] || '/resources/soundfont/';
 
 namespace arb.soundcipher {
 
@@ -355,7 +355,7 @@ namespace arb.soundcipher {
         private static MAX_CHANNEL: number = 16;
         static maxChannelErrorHandler: () => void = () => { };
 
-        static instrumentSoundMap = new Map();
+        static instrumentSoundMap: Map<number, { name: string; isLoaded: boolean; }> = new Map();
         static openChannels = [];
         private channel: number;
 
@@ -394,7 +394,7 @@ namespace arb.soundcipher {
             SoundCipher.instrumentSoundMap.set(SoundCipher.EPIANO2, { name: "electric_piano_2", isLoaded: false }); /* 5 */
 
             SoundCipher.instrumentSoundMap.set(SoundCipher.HARPSICHORD, { name: "harpsichord", isLoaded: false }); /* 6 */
-            SoundCipher.instrumentSoundMap.set(SoundCipher.CLAV, { name: "clavichord", isLoaded: false }); /* 7 */
+            SoundCipher.instrumentSoundMap.set(SoundCipher.CLAV, { name: "clavinet", isLoaded: false }); /* 7 */
             SoundCipher.instrumentSoundMap.set(SoundCipher.CELESTE, { name: "celesta", isLoaded: false }); /* 8 */
             SoundCipher.instrumentSoundMap.set(SoundCipher.GLOCKENSPIEL, { name: "glockenspiel", isLoaded: false }); /* 9 */
 
@@ -440,8 +440,8 @@ namespace arb.soundcipher {
             SoundCipher.instrumentSoundMap.set(SoundCipher.HARP, { name: "harpsichord", isLoaded: false }); /* 46 */
 
             SoundCipher.instrumentSoundMap.set(SoundCipher.TIMPANI, { name: "timpani", isLoaded: false }); /* 47 */
-            SoundCipher.instrumentSoundMap.set(SoundCipher.SLOW_STRINGS, { name: "synthstrings_2", isLoaded: false }); /* 51 */
-            SoundCipher.instrumentSoundMap.set(SoundCipher.SYNTH_STRINGS, { name: "synthstrings_1", isLoaded: false }); /* 50 */
+            SoundCipher.instrumentSoundMap.set(SoundCipher.SLOW_STRINGS, { name: "synth_strings_2", isLoaded: false }); /* 51 */
+            SoundCipher.instrumentSoundMap.set(SoundCipher.SYNTH_STRINGS, { name: "synth_strings_1", isLoaded: false }); /* 50 */
 
             SoundCipher.instrumentSoundMap.set(SoundCipher.AAH, { name: "choir_aahs", isLoaded: false }); /* 52 */
             SoundCipher.instrumentSoundMap.set(SoundCipher.OOH, { name: "voice_oohs", isLoaded: false }); /* 53 */
@@ -451,7 +451,7 @@ namespace arb.soundcipher {
             SoundCipher.instrumentSoundMap.set(SoundCipher.MUTED_TRUMPET, { name: "muted_trumpet", isLoaded: false }); /* 59 */
             SoundCipher.instrumentSoundMap.set(SoundCipher.FRENCH_HORN, { name: "french_horn", isLoaded: false }); /* 60 */
 
-            SoundCipher.instrumentSoundMap.set(SoundCipher.SYNTH_BRASS, { name: "synthbrass_1", isLoaded: false }); /* 62 */
+            SoundCipher.instrumentSoundMap.set(SoundCipher.SYNTH_BRASS, { name: "synth_brass_1", isLoaded: false }); /* 62 */
             SoundCipher.instrumentSoundMap.set(SoundCipher.SOPRANO_SAX, { name: "soprano_sax", isLoaded: false }); /* 64 */
             SoundCipher.instrumentSoundMap.set(SoundCipher.TENOR_SAX, { name: "tenor_sax", isLoaded: false }); /* 66 */
 
@@ -479,7 +479,7 @@ namespace arb.soundcipher {
             SoundCipher.instrumentSoundMap.set(SoundCipher.FANTASIA, { name: "xylophone", isLoaded: false }); /* 88 */
             SoundCipher.instrumentSoundMap.set(SoundCipher.WARM_PAD, { name: "pad_2_warm", isLoaded: false }); /* 89 */
             SoundCipher.instrumentSoundMap.set(SoundCipher.POLYSYNTH, { name: "pad_3_polysynth", isLoaded: false }); /* 90 */
-            SoundCipher.instrumentSoundMap.set(SoundCipher.SPACE_VOICE, { name: "synth_voice", isLoaded: false }); /* 91 */
+            SoundCipher.instrumentSoundMap.set(SoundCipher.SPACE_VOICE, { name: "polysynth", isLoaded: false }); /* 91 */
 
             SoundCipher.instrumentSoundMap.set(SoundCipher.BOWED_GLASS, { name: "pad_5_bowed", isLoaded: false }); /* 92 */
             SoundCipher.instrumentSoundMap.set(SoundCipher.METAL_PAD, { name: "pad_6_metallic", isLoaded: false }); /* 93 */
@@ -501,7 +501,7 @@ namespace arb.soundcipher {
             SoundCipher.instrumentSoundMap.set(SoundCipher.SHAMISEN, { name: "shamisen", isLoaded: false }); /* 106 */
             SoundCipher.instrumentSoundMap.set(SoundCipher.KOTO, { name: "koto", isLoaded: false }); /* 107 */
             SoundCipher.instrumentSoundMap.set(SoundCipher.KALIMBA, { name: "kalimba", isLoaded: false }); /* 108 */
-            SoundCipher.instrumentSoundMap.set(SoundCipher.BAGPIPES, { name: "bag_pipe", isLoaded: false }); /* 109 */
+            SoundCipher.instrumentSoundMap.set(SoundCipher.BAGPIPES, { name: "bagpipe", isLoaded: false }); /* 109 */
             SoundCipher.instrumentSoundMap.set(SoundCipher.FIDDLE, { name: "fiddle", isLoaded: false }); /* 110 */
             SoundCipher.instrumentSoundMap.set(SoundCipher.SHANNAI, { name: "shanai", isLoaded: false }); /* 111 */
             SoundCipher.instrumentSoundMap.set(SoundCipher.TINKLE_BELL, { name: "tinkle_bell", isLoaded: false }); /* 112 */
@@ -666,4 +666,5 @@ namespace arb.soundcipher {
     function log(message: string) {
         console.info(`SoundCipher: ${message}`);
     }
+    
 }
