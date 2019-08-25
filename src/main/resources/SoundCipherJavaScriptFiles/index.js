@@ -6,7 +6,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const SoundFontUrl = window['SoundCipher__SoundFontUrl'] || '/resources/soundfont/';
 var arb;
 (function (arb) {
     var soundcipher;
@@ -166,15 +165,12 @@ var arb;
                 return this._instrument;
             }
             set instrument(instrumentCode) {
+                log(`set instrument: ${instrumentCode}`);
                 this._instrument = instrumentCode;
                 initialized = initialized.then(() => {
                     this.changeChannelInstrument(instrumentCode);
                     if (!SoundCipher.instrumentSoundMap.get(instrumentCode).isLoaded) {
-                        const instrumentName = SoundCipher.getInstrumentName(instrumentCode);
-                        return new Promise((resolve, reject) => {
-                            log(`requesting instrument ${instrumentName} soundfontUrl: ${SoundFontUrl}`);
-                            MIDI.loadResource(SoundCipher.getLoadInstrumentArgs(instrumentName, resolve));
-                        });
+                        return SoundCipher.loadInstrument(instrumentCode);
                     }
                 });
             }
@@ -208,12 +204,13 @@ var arb;
             static loadInstrument(instrumentCode) {
                 return new Promise((resolve, reject) => {
                     var instrumentName = SoundCipher.getInstrumentName(instrumentCode);
-                    log(`requesting instrument ${instrumentName} soundfontUrl: ${SoundFontUrl}`);
+                    log(`requesting instrument ${instrumentName} soundfontUrl: ${SoundCipher.SoundFontUrl}`);
                     MIDI.loadResource(SoundCipher.getLoadInstrumentArgs(instrumentName, resolve));
                 });
             }
             changeChannelInstrument(instrumentCode) {
                 if (SoundCipher.openChannels.indexOf(this.channel) == -1) {
+                    log(`open channel: ${this.channel}`);
                     SoundCipher.openChannels.push(this.channel);
                     MIDI.programChange(this.channel, instrumentCode);
                 }
@@ -223,7 +220,7 @@ var arb;
             }
             static getLoadInstrumentArgs(instrumentName, onSuccess) {
                 return {
-                    soundfontUrl: SoundFontUrl,
+                    soundfontUrl: SoundCipher.SoundFontUrl,
                     instrument: instrumentName,
                     onprogress: function (state, progress) {
                         log(`instrument [${instrumentName}] loading... state=${state} progress=${progress}`);
@@ -235,6 +232,9 @@ var arb;
                         onSuccess();
                     }
                 };
+            }
+            static get SoundFontUrl() {
+                return window['SoundCipher__SoundFontUrl'] || '/resources/soundfont/';
             }
         }
         SoundCipher.ACOUSTIC_BASS_DRUM = 35;

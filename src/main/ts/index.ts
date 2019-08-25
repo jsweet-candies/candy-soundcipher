@@ -1,7 +1,5 @@
 declare var MIDI: any;
 
-const SoundFontUrl: string = window['SoundCipher__SoundFontUrl'] || '/resources/soundfont/';
-
 namespace arb.soundcipher {
 
     let initialized: Promise<void> = Promise.resolve();
@@ -549,15 +547,12 @@ namespace arb.soundcipher {
         }
 
         set instrument(instrumentCode: number) {
+            log(`set instrument: ${instrumentCode}`);
             this._instrument = instrumentCode;
             initialized = initialized.then(() => {
                 this.changeChannelInstrument(instrumentCode);
                 if (!SoundCipher.instrumentSoundMap.get(instrumentCode).isLoaded) {
-                    const instrumentName = SoundCipher.getInstrumentName(instrumentCode);
-                    return new Promise<void>((resolve, reject) => {
-                        log(`requesting instrument ${instrumentName} soundfontUrl: ${SoundFontUrl}`);
-                        MIDI.loadResource(SoundCipher.getLoadInstrumentArgs(instrumentName, resolve));
-                    });
+                    return SoundCipher.loadInstrument(instrumentCode);
                 }
             });
         }
@@ -600,16 +595,17 @@ namespace arb.soundcipher {
         }
 
 
-        static loadInstrument(instrumentCode: number) {
-            return new Promise((resolve, reject) => {
+        private static loadInstrument(instrumentCode: number): Promise<void> {
+            return new Promise<void>((resolve, reject) => {
                 var instrumentName = SoundCipher.getInstrumentName(instrumentCode);
-                log(`requesting instrument ${instrumentName} soundfontUrl: ${SoundFontUrl}`);
+                log(`requesting instrument ${instrumentName} soundfontUrl: ${SoundCipher.SoundFontUrl}`);
                 MIDI.loadResource(SoundCipher.getLoadInstrumentArgs(instrumentName, resolve));
             });
         }
 
         private changeChannelInstrument(instrumentCode: number) {
             if (SoundCipher.openChannels.indexOf(this.channel) == -1) {
+                log(`open channel: ${this.channel}`);
                 SoundCipher.openChannels.push(this.channel);
                 MIDI.programChange(this.channel, instrumentCode);
             } else {
@@ -619,7 +615,7 @@ namespace arb.soundcipher {
 
         static getLoadInstrumentArgs(instrumentName, onSuccess) {
             return {
-                soundfontUrl: SoundFontUrl,
+                soundfontUrl: SoundCipher.SoundFontUrl,
                 instrument: instrumentName,
                 onprogress: function (state, progress) {
                     log(`instrument [${instrumentName}] loading... state=${state} progress=${progress}`);
@@ -631,6 +627,10 @@ namespace arb.soundcipher {
                     onSuccess();
                 }
             }
+        }
+
+        static get SoundFontUrl(): string {
+            return window['SoundCipher__SoundFontUrl'] || '/resources/soundfont/';
         }
     }
 
@@ -666,5 +666,5 @@ namespace arb.soundcipher {
     function log(message: string) {
         console.info(`SoundCipher: ${message}`);
     }
-    
+
 }
