@@ -1,0 +1,11 @@
+{
+  "name": "candy-soundcipher",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/jsweet-candies/candy-soundcipher.git",
+  "author": "lgrignon <louis.grignon@idcapture.fr>",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "3.5.3"
+  }
+}

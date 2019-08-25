@@ -6,3 +6,4 @@
 /.jsweet/
 src/main/resources/META-INF/resources/typings
 /soundcipher
+/node_modules/
